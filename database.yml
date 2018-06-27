@@ -1,0 +1,11 @@
+development:
+  dialect: "sqlite3"
+  database: /home/fox/.go/src/github.com/foxboron/todo_development.sqlite
+
+test:
+  dialect: "sqlite3"
+  database: /home/fox/.go/src/github.com/foxboron/todo_test.sqlite
+
+production:
+  dialect: "sqlite3"
+  database: /home/fox/.go/src/github.com/foxboron/todo_production.sqlite
