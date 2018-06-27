@@ -7,6 +7,7 @@ const ManifestPlugin = require("webpack-manifest-plugin");
 const CleanObsoleteChunks = require('webpack-clean-obsolete-chunks');
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const LiveReloadPlugin = require('webpack-livereload-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 const configurator = {
   entries: function(){
@@ -40,6 +41,7 @@ const configurator = {
 
   plugins() {
     var plugins = [
+      new VueLoaderPlugin(),
       new CleanObsoleteChunks(),
       new Webpack.ProvidePlugin({$: "jquery",jQuery: "jquery"}),
       new MiniCssExtractPlugin({filename: "[name].[contenthash].css"}),
@@ -62,6 +64,7 @@ const configurator = {
             { loader: "sass-loader", options: {sourceMap: true}}
           ]
         },
+        { test: /\.vue$/, loader: "vue-loader"},
         { test: /\.jsx?$/,loader: "babel-loader",exclude: /node_modules/ },
         { test: /\.(woff|woff2|ttf|svg)(\?v=\d+\.\d+\.\d+)?$/,use: "url-loader"},
         { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,use: "file-loader" },
@@ -76,6 +79,12 @@ const configurator = {
     
     var config = {
       mode: env,
+      resolve: {
+        alias: {
+          vue$: `${__dirname}/node_modules/vue/dist/vue.esm.js`,
+          router$: `${__dirname}/node_modules/vue-router/dist/vue-router.esm.js`
+        }
+      },
       entry: configurator.entries(),
       output: {filename: "[name].[hash].js", path: `${__dirname}/public/assets`},
       plugins: configurator.plugins(),

@@ -46,8 +46,10 @@ func App() *buffalo.App {
 
 		// Setup and use translations:
 		app.Use(translations())
-
 		app.GET("/", HomeHandler)
+
+		api := app.Group("/api")
+		api.Resource("/todos", TodosResource{})
 
 		app.ServeFiles("/", assetsBox) // serve files from the public directory
 	}
