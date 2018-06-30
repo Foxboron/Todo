@@ -1,11 +1,17 @@
-require("expose-loader?$!expose-loader?jQuery!jquery");
-require("bootstrap/dist/js/bootstrap.bundle.js");
-
 import Vue from "vue";
-import VueRouter from "router";
-Vue.use(VueRouter);
 
+import "expose-loader?$!expose-loader?jQuery!jquery";
+//import "quasar-framework/dist/umd/icons.material-icons.umd.min.js";
+
+import VueRouter from "router";
 import Axios from 'axios'
+
+import Quasar, { QLayout, QInput, QBtn, Dialog, Ripple } from "quasar-framework/dist/umd/quasar.mat.umd.min.js";
+
+Vue.use(VueRouter);
+Vue.use(Quasar, { components: [QLayout, QInput, QBtn], plugins: [Dialog], directives: [Ripple] });
+
+
 Axios.defaults.headers.common["Content-Type"] = "application/json";
 Vue.prototype.$http = Axios;
 
@@ -17,8 +23,8 @@ const router = new VueRouter({
 
 import Todo from "./components/Todo.vue";
 
-const app = new Vue({
-  el: "#app",
-  template: '<Todo/>',
-  components: {Todo}
-})
+new Vue({
+    el: '#q-app',
+    router,
+    render: h => h(Todo),
+  })

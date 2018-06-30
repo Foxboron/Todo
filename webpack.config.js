@@ -64,6 +64,7 @@ const configurator = {
             { loader: "sass-loader", options: {sourceMap: true}}
           ]
         },
+        { test: /\.css$/, loader: "css-loader"},
         { test: /\.vue$/, loader: "vue-loader"},
         { test: /\.jsx?$/,loader: "babel-loader",exclude: /node_modules/ },
         { test: /\.(woff|woff2|ttf|svg)(\?v=\d+\.\d+\.\d+)?$/,use: "url-loader"},
