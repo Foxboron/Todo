@@ -6,10 +6,10 @@ import "expose-loader?$!expose-loader?jQuery!jquery";
 import VueRouter from "router";
 import Axios from 'axios'
 
-import Quasar, { QLayout, QInput, QBtn, Dialog, Ripple } from "quasar-framework/dist/umd/quasar.mat.umd.min.js";
+import Quasar from "quasar-framework/dist/umd/quasar.mat.umd.min.js";
 
 Vue.use(VueRouter);
-Vue.use(Quasar, { components: [QLayout, QInput, QBtn], plugins: [Dialog], directives: [Ripple] });
+Vue.use(Quasar);
 
 
 Axios.defaults.headers.common["Content-Type"] = "application/json";

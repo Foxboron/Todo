@@ -1,25 +1,27 @@
 <template>
 <div id="q-app">
-    <section v-for="todo in info">
-    {{todo.name}}
-    {{todo.description}}
-    </section>
-      <q-btn
-        :label="`Count ${count}`"
-        @click="count++"
-        :repeat-timeout="1000"
-        color="primary"
-        icon="create"
-      />
+    <todo-card v-for="todo in info"
+        v-bind:todo=todo
+        v-bind:edit="todo.edit"/>
+<q-btn round color="secondary" @click="addTodo" >
+  <q-icon name="add"/>
+</q-btn>
 </div>
 </template>
 <script charset="utf-8">
+
+import TodoCard from "./TodoCard.vue";
+
 export default {
     name: 'todo',
+  components: {
+    'todo-card': TodoCard,
+  },
     data () {
         return {
             info: "Loading",
             loading: true,
+            edit: false,
             errored: false,
             count: 0
         }
@@ -28,12 +30,12 @@ export default {
         this.fetchData();
     },
     methods: {
-        alert () {
-       this.$q.dialog({
-            title: 'Good job!'
-          })
+        addTodo(){
+            console.log(this.info)
+            this.info.push({edit: true})
+            console.log(this.info)
         },
-        fetchData (){
+        fetchData () {
             this.$http
                 .get('/api/todos')
                 .then(response => {
