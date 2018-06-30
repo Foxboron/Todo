@@ -13,6 +13,7 @@ Vue.use(Quasar);
 
 
 Axios.defaults.headers.common["Content-Type"] = "application/json";
+Axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 Vue.prototype.$http = Axios;
 
 const router = new VueRouter({

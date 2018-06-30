@@ -1,7 +1,8 @@
 <template>
 <div id="q-app">
     <todo-card v-for="todo in info"
-        v-bind:todo=todo
+        v-bind:todo="todo"
+        v-bind:key="todo.id"
         v-bind:edit="todo.edit"/>
 <q-btn round color="secondary" @click="addTodo" >
   <q-icon name="add"/>
@@ -31,9 +32,7 @@ export default {
     },
     methods: {
         addTodo(){
-            console.log(this.info)
             this.info.push({edit: true})
-            console.log(this.info)
         },
         fetchData () {
             this.$http
